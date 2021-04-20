@@ -126,7 +126,12 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
 
     //BOTÓ ENTITATS
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        //creem la nova finestra LlistatJFrame
+        JFrameEmpreses obj = new JFrameEmpreses(); 	
+        //la fem visible
+        obj.setVisible(true);           
+        //eliminem la finestra actual
+        dispose(); 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

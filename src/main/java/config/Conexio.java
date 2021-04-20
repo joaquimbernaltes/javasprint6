@@ -16,7 +16,7 @@ public class Conexio {
             Class.forName("com.mysql.jdbc.Driver");
             //Intentar fer la conexió
             String user = "root";
-            String psswd = "Alumne1234";
+            String psswd = "";
             String URL = "jdbc:mysql://localhost:3306/proiectussprint4";
             con=DriverManager.getConnection(URL,user,psswd);
             JOptionPane.showMessageDialog(null, "Connexió realitzada");
