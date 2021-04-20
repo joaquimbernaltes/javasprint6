@@ -47,6 +47,8 @@ public class JFrameProjectes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        field_id = new javax.swing.JTextField();
         field_nom = new javax.swing.JTextField();
         field_data = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -54,6 +56,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TaulaProjectes = new javax.swing.JTable();
@@ -73,6 +76,10 @@ public class JFrameProjectes extends javax.swing.JFrame {
 
         jLabel4.setText("Proposta:");
 
+        jLabel5.setText("ID");
+
+        field_id.setEditable(false);
+
         field_data.setText("2021-01-01");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -90,7 +97,11 @@ public class JFrameProjectes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(field_data, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(field_nom))))
+                            .addComponent(field_nom))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(field_id, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,7 +110,9 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(field_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -119,25 +132,39 @@ public class JFrameProjectes extends javax.swing.JFrame {
         });
 
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Esborrar");
 
         jButton4.setText("List Prop.");
+
+        jButton6.setText("Clear");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +174,8 @@ public class JFrameProjectes extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,6 +189,11 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 "ID", "ID_Proposta", "Nom Projecte", "Data Inici", "Data Final", "Estat"
             }
         ));
+        TaulaProjectes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TaulaProjectesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TaulaProjectes);
         if (TaulaProjectes.getColumnModel().getColumnCount() > 0) {
             TaulaProjectes.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -173,7 +206,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -253,7 +286,8 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 projecte.inserirProjecte(field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
                 llimpiartaula();
-                llistarProjectes(); 
+                llistarProjectes();
+                llimpiarcamps();
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
@@ -261,6 +295,50 @@ public class JFrameProjectes extends javax.swing.JFrame {
              }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    //Funció que recupera les dades de la taula i les insereix als textfields
+    private void TaulaProjectesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaulaProjectesMouseClicked
+        int fila=TaulaProjectes.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Projecte no seleccionat");
+        }else{
+            
+            try{
+                int id=Integer.parseInt((String)TaulaProjectes.getValueAt(fila,0).toString());
+                String nom_projecte=(String)TaulaProjectes.getValueAt(fila, 2);
+                String data_inici=(String)TaulaProjectes.getValueAt(fila, 3);
+                field_id.setText(""+id);
+                field_nom.setText(nom_projecte);
+                field_data.setText(data_inici);    
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "No hi han projectes");
+            }
+        }
+    }//GEN-LAST:event_TaulaProjectesMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         if (field_nom.getText().equals("") || field_id.getText().equals("") || field_data.getText().equals("")) {
+            //Mostrem error si no selecciona res
+            JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Projectes projecte = new Projectes();
+
+             try {
+                projecte.modificarprojecte(field_id.getText(),field_nom.getText(), field_data.getText());
+                JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
+                llimpiartaula();
+                llistarProjectes(); 
+             } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
+
+             }
+        }        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    //Botó llimpiar camps
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        llimpiarcamps();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,20 +409,29 @@ public class JFrameProjectes extends javax.swing.JFrame {
             i=i-1;
         }
     }
+    
+    void llimpiarcamps(){
+        field_id.setText("");
+        field_nom.setText("");
+        field_data.setText("2021-01-01");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TaulaProjectes;
     private javax.swing.JTextField field_data;
+    private javax.swing.JTextField field_id;
     private javax.swing.JTextField field_nom;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
