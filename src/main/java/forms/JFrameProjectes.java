@@ -1,9 +1,7 @@
 package forms;
 
-import config.Conexio;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import config.*;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import classes.*;
@@ -18,9 +16,7 @@ import java.util.logging.Logger;
 public class JFrameProjectes extends javax.swing.JFrame {
 
     /* Connexió BD */
-    Conexio con= new Conexio();
-    Connection cn;
-    Statement st;
+    RealitzarConnexio newconnection= new RealitzarConnexio();
     ResultSet rs;   
     DefaultTableModel model;
     
@@ -139,6 +135,11 @@ public class JFrameProjectes extends javax.swing.JFrame {
         });
 
         jButton3.setText("Esborrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("List Prop.");
 
@@ -206,7 +207,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -315,6 +316,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TaulaProjectesMouseClicked
 
+    //Botó modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          if (field_nom.getText().equals("") || field_id.getText().equals("") || field_data.getText().equals("")) {
             //Mostrem error si no selecciona res
@@ -324,13 +326,13 @@ public class JFrameProjectes extends javax.swing.JFrame {
 
              try {
                 projecte.modificarprojecte(field_id.getText(),field_nom.getText(), field_data.getText());
-                JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
+                JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
                 llimpiartaula();
-                llistarProjectes(); 
+                llistarProjectes();
+                llimpiarcamps();
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
-
+                JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
              }
         }        
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -339,6 +341,28 @@ public class JFrameProjectes extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         llimpiarcamps();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    //Botó "Esborrar"
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int filaseleccionada=TaulaProjectes.getSelectedRow();
+        if(filaseleccionada==-1){
+            JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
+        }else{
+            Projectes projecte = new Projectes();
+            try {
+                projecte.esborrarprojecte(field_id.getText(),field_nom.getText(), field_data.getText());
+                JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
+                llimpiartaula();
+                llistarProjectes();
+                llimpiarcamps();
+             } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
+             }
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,9 +402,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
     void llistarProjectes(){
         String sql="select * from proyectos";
         try {
-            cn=con.getConnection();
-            st=cn.createStatement();
-            rs=st.executeQuery(sql);
+            rs = newconnection.consultasql(sql);
             //Indiquem la grandaria del nou objecte
             Object[]projecte=new Object[6];
             //Iniciem el model
@@ -394,9 +416,13 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 projecte[3]=rs.getString("data_inici");
                 projecte[4]=rs.getString("data_final");
                 projecte[5]=rs.getString("estat");
-                model.addRow(projecte);
+                //Revisar en Joan!!!
+                if(projecte[5].equals("actiu")){
+                    model.addRow(projecte);
+                }
             }
             //Envia les dades a la taula per mostrar-les
+
             TaulaProjectes.setModel(model);
         } catch (Exception e) {
             

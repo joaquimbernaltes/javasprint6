@@ -22,11 +22,11 @@ public class RealitzarConnexio {
         st.executeUpdate(sql);
     }
     
-        //Connexió SQL para fitxer classes.Projectes
-    public void consultasql(String sql) throws SQLException {
+    //Connexió SQL para fitxer classes.Projectes
+    public ResultSet consultasql(String sql) throws SQLException {
         cn=con.getConnection();
         st=cn.createStatement();
-        rs=st.executeQuery(sql);
+        return st.executeQuery(sql);
     }
     
 }
