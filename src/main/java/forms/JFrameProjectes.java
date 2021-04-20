@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author alumne
+ * @author Ximo
  */
 public class JFrameProjectes extends javax.swing.JFrame {
 
@@ -286,9 +286,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
              try {
                 projecte.inserirProjecte(field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
-                llimpiartaula();
-                llistarProjectes();
-                llimpiarcamps();
+                resetprojecte();
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
@@ -327,9 +325,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
              try {
                 projecte.modificarprojecte(field_id.getText(),field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
-                llimpiartaula();
-                llistarProjectes();
-                llimpiarcamps();
+                resetprojecte();
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
@@ -339,7 +335,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
 
     //Botó llimpiar camps
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        llimpiarcamps();
+        resetprojecte();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     //Botó "Esborrar"
@@ -352,16 +348,12 @@ public class JFrameProjectes extends javax.swing.JFrame {
             try {
                 projecte.esborrarprojecte(field_id.getText(),field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
-                llimpiartaula();
-                llistarProjectes();
-                llimpiarcamps();
+                resetprojecte();
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
              }
-        }
-        
-        
+        }    
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -397,6 +389,12 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 new JFrameProjectes().setVisible(true);
             }
         });
+    }
+    
+    void resetprojecte(){
+        llimpiartaula();
+        llistarProjectes();
+        llimpiarcamps();
     }
     
     void llistarProjectes(){
