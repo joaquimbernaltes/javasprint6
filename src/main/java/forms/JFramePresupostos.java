@@ -55,13 +55,12 @@ public class JFramePresupostos extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dades"));
         jPanel1.setName(""); // NOI18N
 
-        jLabel2.setText("Nom Pressupost:");
+        jLabel2.setText("Nom del cost:");
 
         jLabel3.setText("Preu:");
 
         jLabel4.setText("Quantitat:");
 
-        field_cost.setText("30$");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,7 +245,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
                 presupost.inserirPressupost(field_nom.getText(), field_cost.getText(), field_quantitat.getText()); //String nom_cost,String preu_cost,String quantitat_cost
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
 
-                //ll_proj.inserirProjecte(field_nom.getText(), field_descripcio.getText(), prop);
+
                 //enrereMouseClicked(evt);
             } catch (Exception e) {
                 Logger.getLogger(JFramePresupostos.class.getName()).log(Level.SEVERE, null, e);
