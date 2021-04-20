@@ -252,9 +252,8 @@ public class JFrameProjectes extends javax.swing.JFrame {
              try {
                 projecte.inserirProjecte(field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
-
-                 //ll_proj.inserirProjecte(field_nom.getText(), field_descripcio.getText(), prop);
-                 //enrereMouseClicked(evt);
+                llimpiartaula();
+                llistarProjectes(); 
              } catch (Exception e) {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
@@ -304,6 +303,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
             cn=con.getConnection();
             st=cn.createStatement();
             rs=st.executeQuery(sql);
+            //Indiquem la grandaria del nou objecte
             Object[]projecte=new Object[6];
             //Iniciem el model
             model=(DefaultTableModel)TaulaProjectes.getModel();
@@ -322,6 +322,13 @@ public class JFrameProjectes extends javax.swing.JFrame {
             TaulaProjectes.setModel(model);
         } catch (Exception e) {
             
+        }
+    }
+    //Funció que serveix per a llimpiar tota la taula cada vegada que llistem
+    void llimpiartaula(){
+        for(int i=0;i<TaulaProjectes.getRowCount();i++){
+            model.removeRow(i);
+            i=i-1;
         }
     }
 
