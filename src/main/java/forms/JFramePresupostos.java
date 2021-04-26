@@ -256,6 +256,81 @@ public class JFramePresupostos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+    void llimpiarcamps(){
+        field_id.setText("");
+        field_nom.setText("");
+        field_cost.setText("30$");
+    }
+
+    void resetprojecte(){
+        llimpiartaula();
+        llistarPresupostos();
+        llimpiarcamps();
+    }
+
+    void llimpiartaula(){
+        for(int i=0;i<tablaDatos.getRowCount();i++){
+            model.removeRow(i);
+            i=i-1;
+        }
+    }
+    //Botó "Esborrar"
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int filaseleccionada=tablaDatos.getSelectedRow();
+        if(filaseleccionada==-1){
+            JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
+        }else{
+            Presupostos projecte = new Presupostos();
+            try {
+                projecte.esborrarPressupost(field_id.getText(),field_nom.getText(), field_data.getText());
+                JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
+                resetprojecte();
+            } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
+            }
+        }
+    }
+
+    //Botó modificar
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (field_nom.getText().equals("") || field_id.getText().equals("") || field_data.getText().equals("")) {
+            //Mostrem error si no selecciona res
+            JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Presupostos projecte = new Presupostos();
+
+            try {
+                projecte.modificarPressupost(field_id.getText(),field_nom.getText(), field_cost.getText());
+                JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
+                resetprojecte();
+            } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    //Funció que recupera les dades de la taula i les insereix als textfields
+    private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
+        int fila=tablaDatos.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Projecte no seleccionat");
+        }else{
+
+            try{
+                int id=Integer.parseInt((String)tablaDatos.getValueAt(fila,0).toString());
+                String nom_projecte=(String)tablaDatos.getValueAt(fila, 2);
+                String data_inici=(String)tablaDatos.getValueAt(fila, 3);
+                field_id.setText(""+id);
+                field_nom.setText(nom_projecte);
+                field_data.setText(data_inici);
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "No hi han projectes");
+            }
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

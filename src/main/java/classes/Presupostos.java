@@ -33,6 +33,19 @@ public class Presupostos {
         st=cn.createStatement();
         st.executeUpdate(sql);
     }
+    public void modificarPressupost(String id,  String nom, String data) throws SQLException {
+        String sql = "update proyectos SET nom_projecte='"+nom+"',data_inici='"+data+"' where proyectos.id="+id;
+        newconnection.afegirsql(sql);
+    }
+
+
+    public void esborrarPressupost(String id,  String nom, String data) throws SQLException {
+        String estat = "inactiu";
+        String sql = "update proyectos SET estat='"+estat+"' where proyectos.id="+id;
+        newconnection.afegirsql(sql);
+    }
+
+
 
 }
 
