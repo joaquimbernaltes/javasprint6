@@ -150,7 +150,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "ID", "ID_Presupost", "Nom Cost", "Preu", "Quantitat", "Estat"
+                        "id","id_pressupost", "nom_cost","preu_cost", "quantitat_cost" ,"total_linea_producte" ,"iva" ,"procedencia" ,"estat_proposta" , "estat"
                 }
         ));
         jScrollPane1.setViewportView(tablaDatos);
@@ -242,7 +242,9 @@ public class JFramePresupostos extends javax.swing.JFrame {
             Presupostos presupost = new Presupostos();
 
             try {
-                presupost.inserirPressupost(field_nom.getText(), field_cost.getText(), field_quantitat.getText()); //String nom_cost,String preu_cost,String quantitat_cost
+                Double cost = Double.parseDouble(field_cost.getText());
+                int quantitat = Integer.parseInt(field_quantitat.getText());
+                presupost.inserirPressupost(field_nom.getText(), cost, quantitat); //String nom_cost,String preu_cost,String quantitat_cost
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
 
 
@@ -296,19 +298,22 @@ public class JFramePresupostos extends javax.swing.JFrame {
             cn = con.getConnection();
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            Object[] presupost = new Object[7];
+            Object[] presupost = new Object[10];
             //Iniciem el model
             model = (DefaultTableModel) tablaDatos.getModel();
 
             //Indiquem els camps i indiquem que s'afegeixi la línia
             while (rs.next()) {
                 presupost[0] = rs.getInt("id");
-                presupost[1] = rs.getInt("id_presupost");
+                presupost[1] = rs.getInt("id_pressupost");
                 presupost[2] = rs.getString("nom_cost");
                 presupost[3] = rs.getString("preu_cost");
                 presupost[4] = rs.getString("quantitat_cost");
-                presupost[5] = rs.getString("estat_proposta");
-                presupost[6] = rs.getString("estat");
+                presupost[5] = rs.getString("total_linea_producte");
+                presupost[6] = rs.getString("iva");
+                presupost[7] = rs.getString("procedencia");
+                presupost[8] = rs.getString("estat_proposta");
+                presupost[9] = rs.getString("estat");
                 model.addRow(presupost);
             }
             //Envia les dades a la taula per mostrar-les

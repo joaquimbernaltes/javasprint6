@@ -26,13 +26,14 @@ public class Presupostos {
     ResultSet rs;
     DefaultTableModel model;
 
-    public void inserirPressupost(String nom_cost,String preu_cost,String quantitat_cost) throws SQLException {
-
-        String sql = "insert into linia_presupuestos (id,id_pressupost, nom_cost,preu_cost,quantitat_cost,estat_proposta , estat) values ('"+1+"','"+1+"','"+nom_cost+"','"+preu_cost+"','"+quantitat_cost+"','Acceptat','actiu')";
+    public void inserirPressupost(String nom_cost,Double preu_cost,int quantitat_cost) throws SQLException {
+        double total_linia_producte = preu_cost *quantitat_cost;
+        String sql = "insert into linia_presupuestos (id,id_pressupost, nom_cost,preu_cost, quantitat_cost ,total_linia_producte ,iva ,procedencia ,estat_proposta , estat) values('"+1+"','"+1+"','"+nom_cost+"','"+preu_cost+"','"+quantitat_cost+"' ,'" +total_linia_producte+ "', '21½' ,'Entitat','Acceptat','actiu')";
         cn=con.getConnection();
         st=cn.createStatement();
         st.executeUpdate(sql);
     }
 
 }
+
 
