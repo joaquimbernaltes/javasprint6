@@ -3,6 +3,7 @@ package forms;
 import classes.Presupostos;
 
 import config.Conexio;
+import config.realitzarConnexio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +16,7 @@ import java.util.logging.Logger;
 public class JFramePresupostos extends javax.swing.JFrame {
 
     /* Connexió BD */
-    Conexio con = new Conexio();
-    Connection cn;
-    Statement st;
+    realitzarConnexio newconnection= new realitzarConnexio();
     ResultSet rs;
     DefaultTableModel model;
 
@@ -257,12 +256,12 @@ public class JFramePresupostos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     void llimpiarcamps(){
-        field_id.setText("");
+        //field_id.setText("");
         field_nom.setText("");
         field_cost.setText("30$");
     }
 
-    void resetprojecte(){
+    void resetpressupost(){
         llimpiartaula();
         llistarPresupostos();
         llimpiarcamps();
@@ -280,33 +279,35 @@ public class JFramePresupostos extends javax.swing.JFrame {
         if(filaseleccionada==-1){
             JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
         }else{
-            Presupostos projecte = new Presupostos();
+            Presupostos presupost = new Presupostos();
             try {
-                projecte.esborrarPressupost(field_id.getText(),field_nom.getText(), field_data.getText());
+                presupost.esborrarPressupost(field_nom.getText());
                 JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
-                resetprojecte();
+                resetpressupost();
             } catch (Exception e) {
-                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
+                Logger.getLogger(JFramePresupostos.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha esborrat el presupost correctament " + e.getMessage());
             }
         }
     }
 
     //Botó modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (field_nom.getText().equals("") || field_id.getText().equals("") || field_data.getText().equals("")) {
+        if (field_nom.getText().equals("") || field_quantitat.getText().equals("") || field_cost.getText().equals("")) {
             //Mostrem error si no selecciona res
             JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
-            Presupostos projecte = new Presupostos();
+            Presupostos pressupost = new Presupostos();
 
             try {
-                projecte.modificarPressupost(field_id.getText(),field_nom.getText(), field_cost.getText());
+                Double cost = Double.parseDouble(field_cost.getText());
+                int quantitat = Integer.parseInt(field_quantitat.getText());
+                pressupost.modificarPressupost(field_nom.getText(), cost, quantitat);
                 JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
-                resetprojecte();
+                resetpressupost();
             } catch (Exception e) {
-                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
+                Logger.getLogger(JFramePresupostos.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha modificat el presupost correctament " + e.getMessage());
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -316,18 +317,18 @@ public class JFramePresupostos extends javax.swing.JFrame {
     private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
         int fila=tablaDatos.getSelectedRow();
         if(fila==-1){
-            JOptionPane.showMessageDialog(null, "Projecte no seleccionat");
+            JOptionPane.showMessageDialog(null, "Presupost no seleccionat");
         }else{
 
             try{
-                int id=Integer.parseInt((String)tablaDatos.getValueAt(fila,0).toString());
-                String nom_projecte=(String)tablaDatos.getValueAt(fila, 2);
-                String data_inici=(String)tablaDatos.getValueAt(fila, 3);
-                field_id.setText(""+id);
-                field_nom.setText(nom_projecte);
-                field_data.setText(data_inici);
+                String nom_pressupost=tablaDatos.getValueAt(fila,3).toString();
+                String cost=(String)tablaDatos.getValueAt(fila, 4);
+                String quantitat=(String)tablaDatos.getValueAt(fila, 5);
+                field_quantitat.setText(cost);
+                field_nom.setText(nom_pressupost);
+                field_cost.setText(quantitat);
             } catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "No hi han projectes");
+                JOptionPane.showMessageDialog(null, "No hi han pressupostos");
             }
         }
     }
@@ -370,9 +371,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
     void llistarPresupostos() {
         String sql = "select * from linia_presupuestos";
         try {
-            cn = con.getConnection();
-            st = cn.createStatement();
-            rs = st.executeQuery(sql);
+            rs = newconnection.consultasql(sql);
             Object[] presupost = new Object[10];
             //Iniciem el model
             model = (DefaultTableModel) tablaDatos.getModel();

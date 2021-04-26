@@ -32,5 +32,11 @@ public class Projectes {
             st=cn.createStatement();
             st.executeUpdate(sql);
     }
+    public void modificarProjecte (String a, String b, String c){
+
+    }
+    public void esborrarprojecte(String a, String b, String c){
+
+    }
     
 }
