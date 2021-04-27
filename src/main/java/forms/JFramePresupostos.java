@@ -34,6 +34,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        field_id = new javax.swing.JTextField();
         field_nom = new javax.swing.JTextField();
         field_cost = new javax.swing.JTextField();
         field_quantitat = new javax.swing.JTextField();
@@ -63,6 +64,8 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
         jLabel5.setText("ID");
 
+        field_id.setEditable(false);
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,7 +82,8 @@ public class JFramePresupostos extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(field_cost, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                                                        .addComponent(field_nom))
+                                                        .addComponent(field_nom)
+                                                        .addComponent(field_quantitat))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel5)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -98,9 +102,11 @@ public class JFramePresupostos extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
-                                        .addComponent(field_quantitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(field_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(field_quantitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -131,6 +137,14 @@ public class JFramePresupostos extends javax.swing.JFrame {
                 resetpressupost();
             }
         });
+
+        jButton5.setText("Enrere");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -197,12 +211,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
                                 .addGap(248, 248, 248))
         );
 
-        jButton5.setText("Enrere");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,7 +313,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
         }else{
             Presupostos presupost = new Presupostos();
             try {
-                presupost.esborrarPressupost(field_nom.getText());
+                presupost.esborrarPressupost(field_id.getText(), field_nom.getText());
                 JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
                 resetpressupost();
             } catch (Exception e) {
@@ -346,7 +355,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
         }else{
 
             try{
-                String id = tablaDatos.getValueAt(fila,0).toString();
+                int id = Integer.parseInt((String) tablaDatos.getValueAt(fila, 0).toString());
                 String nom_pressupost=tablaDatos.getValueAt(fila,2).toString();
                 String cost=tablaDatos.getValueAt(fila, 3).toString();
                 String quantitat=tablaDatos.getValueAt(fila, 4).toString();
@@ -427,6 +436,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
 
     private javax.swing.JTable tablaDatos;
+
     private javax.swing.JTextField field_id;
     private javax.swing.JTextField field_cost;
     private javax.swing.JTextField field_nom;

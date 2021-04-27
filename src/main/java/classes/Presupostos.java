@@ -34,9 +34,9 @@ public class Presupostos {
     }
 
 
-    public void esborrarPressupost(String nom_cost) throws SQLException {
+    public void esborrarPressupost(String id,String nom_cost) throws SQLException {
         String estat = "inactiu";
-        String sql = "update linia_presupuestos SET estat='"+estat+"' where linia_presupuestos.nom_cost="+nom_cost;
+        String sql = "update linia_presupuestos SET estat='"+estat+"' where linia_presupuestos.id="+id;
         newconnection.afegirsql(sql);
     }
 
