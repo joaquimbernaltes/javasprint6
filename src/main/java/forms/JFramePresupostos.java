@@ -33,6 +33,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         field_nom = new javax.swing.JTextField();
         field_cost = new javax.swing.JTextField();
         field_quantitat = new javax.swing.JTextField();
@@ -60,6 +61,8 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
         jLabel4.setText("Quantitat:");
 
+        jLabel5.setText("ID");
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,8 +79,11 @@ public class JFramePresupostos extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(field_cost, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                                                        .addComponent(field_nom)
-                                                        .addComponent(field_quantitat))))
+                                                        .addComponent(field_nom))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(field_id, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -86,14 +92,12 @@ public class JFramePresupostos extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
-                                        .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(field_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
-                                        .addComponent(field_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
                                         .addComponent(field_quantitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
@@ -110,11 +114,23 @@ public class JFramePresupostos extends javax.swing.JFrame {
         });
 
         jButton2.setText("Modificar");
-
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jButton3.setText("Esborrar");
-
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jButton4.setText("List Prop.");
-
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetpressupost();
+            }
+        });
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,6 +168,11 @@ public class JFramePresupostos extends javax.swing.JFrame {
                         "id","id_pressupost", "nom_cost","preu_cost", "quantitat_cost" ,"total_linea_producte" ,"iva" ,"procedencia" ,"estat_proposta" , "estat"
                 }
         ));
+        tablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaDatos);
         if (tablaDatos.getColumnModel().getColumnCount() > 0) {
             tablaDatos.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -241,12 +262,13 @@ public class JFramePresupostos extends javax.swing.JFrame {
             Presupostos presupost = new Presupostos();
 
             try {
+
                 Double cost = Double.parseDouble(field_cost.getText());
                 int quantitat = Integer.parseInt(field_quantitat.getText());
+
                 presupost.inserirPressupost(field_nom.getText(), cost, quantitat); //String nom_cost,String preu_cost,String quantitat_cost
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
-
-
+                resetpressupost();
                 //enrereMouseClicked(evt);
             } catch (Exception e) {
                 Logger.getLogger(JFramePresupostos.class.getName()).log(Level.SEVERE, null, e);
@@ -256,9 +278,10 @@ public class JFramePresupostos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     void llimpiarcamps(){
-        //field_id.setText("");
+        field_id.setText("");
+        field_quantitat.setText("");
         field_nom.setText("");
-        field_cost.setText("30$");
+        field_cost.setText("");
     }
 
     void resetpressupost(){
@@ -293,16 +316,17 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
     //Botó modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (field_nom.getText().equals("") || field_quantitat.getText().equals("") || field_cost.getText().equals("")) {
+        if ( field_id.getText().equals("") || field_nom.getText().equals("") || field_quantitat.getText().equals("") || field_cost.getText().equals("")) {
             //Mostrem error si no selecciona res
             JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
             Presupostos pressupost = new Presupostos();
 
             try {
+
                 Double cost = Double.parseDouble(field_cost.getText());
                 int quantitat = Integer.parseInt(field_quantitat.getText());
-                pressupost.modificarPressupost(field_nom.getText(), cost, quantitat);
+                pressupost.modificarPressupost(field_id.getText(), field_nom.getText(), cost, quantitat);
                 JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
                 resetpressupost();
             } catch (Exception e) {
@@ -313,6 +337,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
+
     //Funció que recupera les dades de la taula i les insereix als textfields
     private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
         int fila=tablaDatos.getSelectedRow();
@@ -321,12 +346,14 @@ public class JFramePresupostos extends javax.swing.JFrame {
         }else{
 
             try{
-                String nom_pressupost=tablaDatos.getValueAt(fila,3).toString();
-                String cost=(String)tablaDatos.getValueAt(fila, 4);
-                String quantitat=(String)tablaDatos.getValueAt(fila, 5);
-                field_quantitat.setText(cost);
+                String id = tablaDatos.getValueAt(fila,0).toString();
+                String nom_pressupost=tablaDatos.getValueAt(fila,2).toString();
+                String cost=tablaDatos.getValueAt(fila, 3).toString();
+                String quantitat=tablaDatos.getValueAt(fila, 4).toString();
+                field_id.setText("" + id);
                 field_nom.setText(nom_pressupost);
-                field_cost.setText(quantitat);
+                field_quantitat.setText(quantitat);
+                field_cost.setText(cost);
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "No hi han pressupostos");
             }
@@ -383,7 +410,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
                 presupost[2] = rs.getString("nom_cost");
                 presupost[3] = rs.getString("preu_cost");
                 presupost[4] = rs.getString("quantitat_cost");
-                presupost[5] = rs.getString("total_linea_producte");
+                presupost[5] = rs.getDouble("total_linia_producte");
                 presupost[6] = rs.getString("iva");
                 presupost[7] = rs.getString("procedencia");
                 presupost[8] = rs.getString("estat_proposta");
@@ -400,6 +427,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
 
     private javax.swing.JTable tablaDatos;
+    private javax.swing.JTextField field_id;
     private javax.swing.JTextField field_cost;
     private javax.swing.JTextField field_nom;
     private javax.swing.JTextField field_quantitat;
@@ -412,6 +440,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
