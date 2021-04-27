@@ -7,6 +7,8 @@ import config.realitzarConnexio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,6 +21,8 @@ public class JFramePresupostos extends javax.swing.JFrame {
     realitzarConnexio newconnection= new realitzarConnexio();
     ResultSet rs;
     DefaultTableModel model;
+
+    public int selectedRow =-1;
 
     public JFramePresupostos() {
         initComponents();
@@ -46,6 +50,13 @@ public class JFramePresupostos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDatos = new javax.swing.JTable();
+       tablaDatos.addMouseListener(new MouseAdapter() {
+
+                  @Override
+                  public void mouseClicked(MouseEvent e) {
+                      selectedRow = tablaDatos.getSelectedRow();
+                  }});
+
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -307,13 +318,13 @@ public class JFramePresupostos extends javax.swing.JFrame {
     }
     //Botó "Esborrar"
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int filaseleccionada=tablaDatos.getSelectedRow();
-        if(filaseleccionada==-1){
+        int fila = selectedRow;
+        if(fila==-1){
             JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
-        }else{
+        } else {
             Presupostos presupost = new Presupostos();
             try {
-                presupost.esborrarPressupost(field_id.getText(), field_nom.getText());
+                presupost.esborrarPressupost(field_id.getText());
                 JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
                 resetpressupost();
             } catch (Exception e) {
@@ -321,7 +332,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No s'ha esborrat el presupost correctament " + e.getMessage());
             }
         }
-    }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     //Botó modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -329,13 +340,13 @@ public class JFramePresupostos extends javax.swing.JFrame {
             //Mostrem error si no selecciona res
             JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
-            Presupostos pressupost = new Presupostos();
+            Presupostos presupost = new Presupostos();
 
             try {
 
                 Double cost = Double.parseDouble(field_cost.getText());
                 int quantitat = Integer.parseInt(field_quantitat.getText());
-                pressupost.modificarPressupost(field_id.getText(), field_nom.getText(), cost, quantitat);
+                presupost.modificarPressupost(field_id.getText(), field_nom.getText(), cost, quantitat);
                 JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
                 resetpressupost();
             } catch (Exception e) {
@@ -350,15 +361,15 @@ public class JFramePresupostos extends javax.swing.JFrame {
     //Funció que recupera les dades de la taula i les insereix als textfields
     private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
         int fila=tablaDatos.getSelectedRow();
-        if(fila==-1){
+        if(fila==-1) {
             JOptionPane.showMessageDialog(null, "Presupost no seleccionat");
-        }else{
+        } else {
 
             try{
                 int id = Integer.parseInt((String) tablaDatos.getValueAt(fila, 0).toString());
-                String nom_pressupost=tablaDatos.getValueAt(fila,2).toString();
-                String cost=tablaDatos.getValueAt(fila, 3).toString();
-                String quantitat=tablaDatos.getValueAt(fila, 4).toString();
+                String nom_pressupost= (String) tablaDatos.getValueAt(fila,2);
+                String cost= (String) tablaDatos.getValueAt(fila, 3);
+                String quantitat=  (String) tablaDatos.getValueAt(fila, 4);
                 field_id.setText("" + id);
                 field_nom.setText(nom_pressupost);
                 field_quantitat.setText(quantitat);
@@ -436,7 +447,6 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
 
     private javax.swing.JTable tablaDatos;
-
     private javax.swing.JTextField field_id;
     private javax.swing.JTextField field_cost;
     private javax.swing.JTextField field_nom;
