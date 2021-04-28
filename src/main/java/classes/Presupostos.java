@@ -28,8 +28,8 @@ public class Presupostos {
         newconnection.afegirsql(sql);
     }
     public void modificarPressupost(String id, String nom_cost,Double preu_cost,int quantitat_cost) throws SQLException {
-
-        String sql = "update linia_presupuestos SET nom_cost='"+nom_cost+"',preu_cost='"+preu_cost+"',quantitat_cost='"+quantitat_cost+"' where linia_presupuestos.id="+id;
+        Double total_linia =preu_cost * quantitat_cost;
+        String sql = "update linia_presupuestos SET nom_cost='"+nom_cost+"',preu_cost='"+preu_cost+"',quantitat_cost='"+quantitat_cost+"',total_linia_producte='"+total_linia+"' where linia_presupuestos.id="+id;
         newconnection.afegirsql(sql);
     }
 

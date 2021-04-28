@@ -23,6 +23,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
     DefaultTableModel model;
 
     public int selectedRow =-1;
+    public String selectedId = "";
 
     public JFramePresupostos() {
         initComponents();
@@ -56,6 +57,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
                   public void mouseClicked(MouseEvent e) {
                       selectedRow = tablaDatos.getSelectedRow();
                   }});
+
 
         jButton5 = new javax.swing.JButton();
 
@@ -145,7 +147,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
         jButton4.setText("List Prop.");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetpressupost();
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -262,7 +264,10 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        //creem la nova finestra LlistatJFrame
+        resetpressupost();
+    }//GEN-LAST:event_jButton5ActionPerformed
     //Botó Tornar menú principal
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //creem la nova finestra LlistatJFrame
@@ -319,12 +324,13 @@ public class JFramePresupostos extends javax.swing.JFrame {
     //Botó "Esborrar"
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int fila = selectedRow;
+        String id = selectedId;
         if(fila==-1){
             JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
         } else {
             Presupostos presupost = new Presupostos();
             try {
-                presupost.esborrarPressupost(field_id.getText());
+                presupost.esborrarPressupost(id);
                 JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
                 resetpressupost();
             } catch (Exception e) {
@@ -366,11 +372,12 @@ public class JFramePresupostos extends javax.swing.JFrame {
         } else {
 
             try{
-                int id = Integer.parseInt((String) tablaDatos.getValueAt(fila, 0).toString());
+                String id = tablaDatos.getValueAt(fila,0).toString();
                 String nom_pressupost= (String) tablaDatos.getValueAt(fila,2);
                 String cost= (String) tablaDatos.getValueAt(fila, 3);
                 String quantitat=  (String) tablaDatos.getValueAt(fila, 4);
-                field_id.setText("" + id);
+                field_id.setText(id);
+                selectedId=id;
                 field_nom.setText(nom_pressupost);
                 field_quantitat.setText(quantitat);
                 field_cost.setText(cost);
@@ -416,7 +423,7 @@ public class JFramePresupostos extends javax.swing.JFrame {
 
 
     void llistarPresupostos() {
-        String sql = "select * from linia_presupuestos";
+        String sql = "select * from linia_presupuestos where estat='actiu'";
         try {
             rs = newconnection.consultasql(sql);
             Object[] presupost = new Object[10];
