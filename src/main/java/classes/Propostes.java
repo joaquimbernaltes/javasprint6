@@ -5,7 +5,9 @@
  */
 package classes;
 
+
 import config.Conexio;
+import config.realitzarConnexio;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
@@ -20,17 +22,20 @@ import java.sql.Statement;
 public class Propostes {
 
     /* Connexió BD */
-    Conexio con= new Conexio();
-    Connection cn;
-    Statement st;
-    ResultSet rs;
-    DefaultTableModel model;
+    realitzarConnexio newconnection= new realitzarConnexio();
+    public void inserirProposta(String nom, String motiu, String descripio) throws SQLException {
+        String sql = "insert into propuestas (id_empresa, id_institut, id_categoria, id_responsable, nom, descripcio, requeriments, estimacio_economica, estat_Proposta, motiu, estat) values('"+1+"','"+1+"','"+1+"','"+1+"' ,'" +nom+ "', '"+descripio+"' ,'Requeriment minim','1000','Disponible','"+motiu+"','actiu')";
+        newconnection.afegirsql(sql);
+    }
+    public void modificarProposta(String id, String nom,String descripcio ,String motiu) throws SQLException {
+        String sql = "update propuestas SET nom='"+nom+"',descripcio='"+descripcio+"',motiu='"+motiu+"' where propuestas.id="+id;
+        newconnection.afegirsql(sql);
+    }
 
-    public void inserirProposta(String nom, String data) throws SQLException {
-        // Projecte m = new Projecte(contador + 1, nom, descripcio, proposta);
-        String sql = "insert into propuestas (id, nom, estat) values ('"+1+"','"+nom+"','actiu')";
-        cn=con.getConnection();
-        st=cn.createStatement();
-        st.executeUpdate(sql);
+
+    public void esborrarProposta(String id) throws SQLException {
+        String estat = "inactiu";
+        String sql = "update propuestas SET estat='"+estat+"' where propuestas.id="+id;
+        newconnection.afegirsql(sql);
     }
 }
