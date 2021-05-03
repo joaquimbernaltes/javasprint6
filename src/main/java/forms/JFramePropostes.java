@@ -2,16 +2,13 @@ package forms;
 
 
 import classes.Propostes;
-import config.Conexio;
 import config.realitzarConnexio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -192,7 +189,7 @@ public class JFramePropostes extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "ID","nom", "descripcio","motiu", "estat_proposta", "estat"
+                        "id","nom", "descripcio", "requeriments", "estimacio_economica", "estat_proposta", "motiu", "estat"
                 }
         ));
         tablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -419,25 +416,27 @@ public class JFramePropostes extends javax.swing.JFrame {
         String sql = "select * from propuestas where estat='actiu'";
         try {
             rs = newconnection.consultasql(sql);
-            Object[] proposta = new Object[10];
+            Object[] proposta = new Object[8];
             //Iniciem el model
             model = (DefaultTableModel) tablaDatos.getModel();
 
             //Indiquem els camps i indiquem que s'afegeixi la línia
             while (rs.next()) {
+
                 proposta[0] = rs.getInt("id");
-                proposta[1] = rs.getInt("mom");
+                proposta[1] = rs.getString("nom");
                 proposta[2] = rs.getString("descripcio");
-                proposta[5] = rs.getDouble("motiu");
-                proposta[4] = rs.getString("estat_proposta");
+                proposta[3] = rs.getString("requeriments");
+                proposta[4] = rs.getString("estimacio_economica");
+                proposta[5] = rs.getString("estat_proposta");
+                proposta[6] = rs.getString("motiu");
                 proposta[7] = rs.getString("estat");
                 model.addRow(proposta);
             }
             //Envia les dades a la taula per mostrar-les
             tablaDatos.setModel(model);
         } catch (Exception e) {
-
-
+            System.out.println("no");
         }
     }
 
