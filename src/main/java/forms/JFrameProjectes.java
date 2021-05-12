@@ -17,9 +17,9 @@ public class JFrameProjectes extends javax.swing.JFrame {
 
     /* Connexió BD */
     RealitzarConnexio newconnection= new RealitzarConnexio();
-    ResultSet rs;   
+    ResultSet rs;
     DefaultTableModel model;
-    
+
     /**
      * Creates new form JFrameProjectes
      */
@@ -183,12 +183,12 @@ public class JFrameProjectes extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Llistat"));
 
         TaulaProjectes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "ID", "ID_Proposta", "Nom Projecte", "Data Inici", "Data Final", "Estat"
-            }
+                },
+                new String[]{
+                        "ID", "ID_Proposta", "Nom Projecte", "Data Inici", "Data Final", "Estat"
+                }
         ));
         TaulaProjectes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -205,18 +205,18 @@ public class JFrameProjectes extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(248, 248, 248))
         );
 
         jButton5.setText("Enrere");
@@ -229,34 +229,34 @@ public class JFrameProjectes extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton5)
+                                                .addGap(50, 50, 50)
+                                                .addComponent(jLabel1)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jButton5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -268,22 +268,22 @@ public class JFrameProjectes extends javax.swing.JFrame {
     //Botó Tornar menú principal
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //creem la nova finestra LlistatJFrame
-        JFrameMenuPrincipal obj = new JFrameMenuPrincipal(); 	
+        JFrameMenuPrincipal obj = new JFrameMenuPrincipal();
         //la fem visible
-        obj.setVisible(true);           
+        obj.setVisible(true);
         //eliminem la finestra actual
-        dispose(); 
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     //Botó Crear
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if (field_nom.getText().equals("")) {
+        if (field_nom.getText().equals("")) {
             //Mostrem error si no selecciona res
             JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
         } else {
             Projectes projecte = new Projectes();
 
-             try {
+            try {
                 projecte.inserirProjecte(field_nom.getText(), field_data.getText());
                 JOptionPane.showMessageDialog(null, "S'ha afegit correctament les noves dades");
                 resetprojecte();
@@ -291,7 +291,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'han pogut afegir les noves dades per el següent error " + e.getMessage());
 
-             }
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     //Funció que recupera les dades de la taula i les insereix als textfields
@@ -300,14 +300,14 @@ public class JFrameProjectes extends javax.swing.JFrame {
         if(fila==-1){
             JOptionPane.showMessageDialog(null, "Projecte no seleccionat");
         }else{
-            
+
             try{
                 int id=Integer.parseInt((String)TaulaProjectes.getValueAt(fila,0).toString());
                 String nom_projecte=(String)TaulaProjectes.getValueAt(fila, 2);
                 String data_inici=(String)TaulaProjectes.getValueAt(fila, 3);
                 field_id.setText(""+id);
                 field_nom.setText(nom_projecte);
-                field_data.setText(data_inici);    
+                field_data.setText(data_inici);
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "No hi han projectes");
             }
@@ -330,7 +330,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
              }
-        }        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Botó llimpiar camps
@@ -353,7 +353,69 @@ public class JFrameProjectes extends javax.swing.JFrame {
                 Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
              }
-        }    
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    //Funció que recupera les dades de la taula i les insereix als textfields
+    private void TaulaProjectesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaulaProjectesMouseClicked
+        int fila = TaulaProjectes.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Projecte no seleccionat");
+        } else {
+
+            try {
+                int id = Integer.parseInt((String) TaulaProjectes.getValueAt(fila, 0).toString());
+                String nom_projecte = (String) TaulaProjectes.getValueAt(fila, 2);
+                String data_inici = (String) TaulaProjectes.getValueAt(fila, 3);
+                field_id.setText("" + id);
+                field_nom.setText(nom_projecte);
+                field_data.setText(data_inici);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No hi han projectes");
+            }
+        }
+    }//GEN-LAST:event_TaulaProjectesMouseClicked
+
+    //Botó modificar
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (field_nom.getText().equals("") || field_id.getText().equals("") || field_data.getText().equals("")) {
+            //Mostrem error si no selecciona res
+            JOptionPane.showMessageDialog(this, "Per favor, introdueix les dades", "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Projectes projecte = new Projectes();
+
+            try {
+                projecte.modificarProjecte(field_id.getText(), field_nom.getText(), field_data.getText());
+                JOptionPane.showMessageDialog(null, "S'han modificat correctament les dades!");
+                resetprojecte();
+            } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha modificat el projecte correctament " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    //Botó llimpiar camps
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        resetprojecte();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    //Botó "Esborrar"
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int filaseleccionada = TaulaProjectes.getSelectedRow();
+        if (filaseleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Has de seleccionar la fila que vols esborrar!");
+        } else {
+            Projectes projecte = new Projectes();
+            try {
+                projecte.esborrarprojecte(field_id.getText(), field_nom.getText(), field_data.getText());
+                JOptionPane.showMessageDialog(null, "S'ha esborrat correctament la fila seleccionada!");
+                resetprojecte();
+            } catch (Exception e) {
+                Logger.getLogger(JFrameProjectes.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "No s'ha esborrat el projecte correctament " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -363,7 +425,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -390,13 +452,13 @@ public class JFrameProjectes extends javax.swing.JFrame {
             }
         });
     }
-    
+
     void resetprojecte(){
         llimpiartaula();
         llistarProjectes();
         llimpiarcamps();
     }
-    
+
     void llistarProjectes(){
         String sql="select * from proyectos";
         try {
@@ -404,8 +466,8 @@ public class JFrameProjectes extends javax.swing.JFrame {
             //Indiquem la grandaria del nou objecte
             Object[]projecte=new Object[6];
             //Iniciem el model
-            model=(DefaultTableModel)TaulaProjectes.getModel();
-            
+            model = (DefaultTableModel) TaulaProjectes.getModel();
+
             //Indiquem els camps i indiquem que s'afegeixi la línia
             while(rs.next()){
                 projecte[0]=rs.getInt("id");
@@ -423,7 +485,7 @@ public class JFrameProjectes extends javax.swing.JFrame {
 
             TaulaProjectes.setModel(model);
         } catch (Exception e) {
-            
+
         }
     }
     //Funció que serveix per a llimpiar tota la taula cada vegada que llistem
@@ -433,8 +495,22 @@ public class JFrameProjectes extends javax.swing.JFrame {
             i=i-1;
         }
     }
-    
+
     void llimpiarcamps(){
+        field_id.setText("");
+        field_nom.setText("");
+        field_data.setText("2021-01-01");
+    }
+
+    //Funció que serveix per a llimpiar tota la taula cada vegada que llistem
+    void llimpiartaula() {
+        for (int i = 0; i < TaulaProjectes.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
+        }
+    }
+
+    void llimpiarcamps() {
         field_id.setText("");
         field_nom.setText("");
         field_data.setText("2021-01-01");
@@ -460,5 +536,5 @@ public class JFrameProjectes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
+// End of variables declaration//GEN-END:variables
 }
