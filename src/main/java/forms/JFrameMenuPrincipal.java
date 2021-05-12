@@ -106,7 +106,11 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
 
     //BOTÓ PROPOSTES
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        JFramePropostes obj = new JFramePropostes(); 	
+        //la fem visible
+        obj.setVisible(true);           
+        //eliminem la finestra actual
+        dispose(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //BOTÓ PRESSUPOSTOS
