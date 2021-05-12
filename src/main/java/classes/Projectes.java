@@ -22,12 +22,6 @@ public class Projectes {
         String sql = "update proyectos SET nom_projecte='"+nom+"',data_inici='"+data+"' where proyectos.id="+id;
         newconnection.afegirsql(sql);
     }
-    public void modificarProjecte (String a, String b, String c){
-
-    }
-    public void esborrarprojecte(String a, String b, String c){
-
-    }
     
     
     public void esborrarprojecte(String id,  String nom, String data) throws SQLException {
